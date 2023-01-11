@@ -9,7 +9,7 @@
     <router-link :to="{ name: 'DetailedNewsView', query: {id:id,date:date,title:title,description:description,imageUrl:imageUrl,content:content,author:author,url:url } }" @click="saveItem(this.title)">
         <a href="#" class="btn btn-sm btn-info d-sm-none d-md-block">Show More</a>
     </router-link>
-        <img src="./icons/editText.png" v-on:click="editHeadline" id="editText" class="btn btn-sm d-md-block"/>
+        <img src="../assets/img/editText.png" v-on:click="editHeadline" id="editText" class="btn btn-sm d-md-block"/>
 
     </div>
 

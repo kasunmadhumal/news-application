@@ -11,7 +11,12 @@
 
 
     <hr id="hr">
-    <div class="row">
+
+    <div v-if="loading" class="d-flex justify-content-center">
+      <div class="spinner-border " role="status"> </div>
+    </div>
+
+    <div v-else class="row">
       <div v-for="news,index in allNewsObjects" class="col-12 col-sm-8 col-md-4">
         <div class="card">
           <div class="card-body">
@@ -95,7 +100,7 @@ import Repository from "../repository/repository"
 }
 
 #hr{
-    margin-top: 6%;
+    margin-top: 5%;
 }
 
 #title {

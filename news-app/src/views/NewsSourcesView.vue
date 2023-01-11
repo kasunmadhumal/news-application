@@ -1,8 +1,15 @@
 <template>
  
     <div class="title-home-page"> <h1 class="wow slideInLeft" id="title">News Sources</h1> </div>
+
+    <hr />
     <div class="container">
-        <div class="row">
+    
+    <div v-if="loading" class="d-flex justify-content-center">
+      <div class="spinner-border " role="status"> </div>
+    </div>
+
+    <div v-else class="row">
       <div class="col-12 col-sm-8 col-md-4" id="card-sources" v-for="sources in newsResources" :key="sources">
         <div class="card card-sources">
             <div class="card-body" id="card-body-sources">

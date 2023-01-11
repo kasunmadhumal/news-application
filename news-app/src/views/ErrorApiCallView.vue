@@ -8,11 +8,15 @@
 
 <script>
 import Repository from '../repository/repository'
+
 export default {
     name:'ErrorApiCallView',
     data(){
-        message:'';
-        apiStatus:''
+
+        return {
+            message:'',
+            apiStatus:''
+        }
         
         
     },

@@ -35,19 +35,16 @@ export default {
         }
     }
    ,
-    async mounted(){
-        
-        this.loading=true
-        Repository.getListOfSources()
-        .then(res => {
-            this.newsResources = res.sources
-            this.loading=false
-
-        }).catch(err => {
-            console.log(err);
-        })
-        
+   async mounted() {
+    try {
+        this.loading = true;
+        const res = await Repository.getListOfSources();
+        this.newsResources = res.sources;
+        this.loading = false;
+    } catch (err) {
+        console.error(err);
     }
+}
     
 
 }

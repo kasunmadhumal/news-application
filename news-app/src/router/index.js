@@ -4,7 +4,6 @@ import DetailedNewsView from "../views/DetailedNewsView.vue";
 import HistoryOfVisitedView from "../views/HistoryOfVisitedView.vue";
 import NewsSourcesView from "../views/NewsSourcesView.vue";
 import ErrorApiCallView from "../views/ErrorApiCallView.vue";
-import SelectedSourcesView from "../views/SelectedSourcesView.vue";
 
 
 
@@ -39,12 +38,6 @@ const router = createRouter({
       name: "ErrorApiCallView",
       component: ErrorApiCallView
       
-    },
-    {
-      path: "/selected-source-view",
-      name: "SelectedSourcesView",
-      component: SelectedSourcesView
-    
     }
   ],
 });

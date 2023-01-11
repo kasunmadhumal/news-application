@@ -61,23 +61,25 @@ import Repository from "../repository/repository"
         }
     }
    ,
-    async mounted(){
-        Repository.getLatestHeadlines().then(res => {
-            this.loading = false;
-            this.allNewsObjects = res.articles
-            console.log(res);
-        }).catch(err => {
-            console.log(err.message);
-        })
-    },
+   async mounted() {
+    try {
+        this.loading = true;
+        const res = await Repository.getLatestHeadlines();
+        this.loading = false;
+        this.allNewsObjects = res.articles;
+    } catch (err) {
+        console.error(err.message);
+    }
+},
     methods:{
-        getSearchData(){
-            Repository.getSearchedHeadlines(this.searchTerm).then(res => {
-              this.allNewsObjects = res.articles
-            }).catch(err => {
-                console.log(err);
-            })
-        }
+        async getSearchData() {
+    try {
+        const res = await Repository.getSearchedHeadlines(this.searchTerm);
+        this.allNewsObjects = res.articles;
+    } catch (err) {
+        console.error(err);
+    }
+}
     }
  }
 

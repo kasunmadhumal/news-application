@@ -1,7 +1,7 @@
 <template>
 
 <div class="card" style="width:100%;height: 100%">
-  <img v-bind:src="imageUrl" class="card-img-top" alt="...">
+  <img v-bind:src="imageUrl" class="card-img-top" alt="image..">
   <div class="card-body">
     <h5 class="card-title" :id="'card-title-'+id">{{title}}</h5>
     <p class="card-text">{{description}}</p>
@@ -11,31 +11,16 @@
     </router-link>
         <img src="./icons/editText.png" v-on:click="editHeadline" id="editText" class="btn btn-sm d-md-block"/>
 
-</div>
+    </div>
 
 
-  </div>
+  </div>    
 </div>
 
 </template>
 
 
 <script>
-
-import Cookies from 'js-cookie'
-
-const pageHistory = {
-  state: {
-    visitedPages: []
-  },
-  mutations: {
-    addVisitedPage(state, page) {
-      state.visitedPages.push(page);
-    }
-  }
-};
-
-
 export default {
     name:'NewsCard',
     props: {
@@ -50,7 +35,10 @@ export default {
     },
     methods: {
         saveItem(title) {
-            this.$store.commit('pageHistory/addVisitedPage', { title:title });
+            this.recentPages = JSON.parse(localStorage.getItem('recentPages')) || []
+            this.recentPages.push(title)
+            localStorage.setItem('recentPages', JSON.stringify(this.recentPages))
+
   },
 
     editHeadline(){

@@ -5,10 +5,8 @@
        <div class="title-home-page"> <h1 class="wow slideInLeft" id="title">Headlines</h1> </div>
 
        <div id="search-bar">
-            <form class="form-inline my-2 my-lg-0" style="float: right;">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="search" v-on:keyup="searchInput">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+                <input class="form-control mr-sm-2" v-model="searchTerm" @input="getSearchData" aria-label="Search" placeholder="Search" />
+     
        </div>
 
 
@@ -68,7 +66,7 @@ import Repository from "../repository/repository"
         })
     },
     methods:{
-        searchInput(){
+        getSearchData(){
             Repository.getSearchedHeadlines(this.searchTerm).then(res => {
               this.allNewsObjects = res.articles
             }).catch(err => {

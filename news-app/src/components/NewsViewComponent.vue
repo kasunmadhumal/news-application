@@ -1,11 +1,19 @@
 <template>
 
-<div class="card" style="width:100%;height: 400px">
+<div class="card" style="width:100%;height: 100%">
   <img v-bind:src="imageUrl" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">{{title}}</h5>
+    <h5 class="card-title" :id="'card-title-'+id">{{title}}</h5>
     <p class="card-text">{{description}}</p>
-    <a href="#" class="btn btn-primary">Show More</a>
+    <div style="display: flex;">
+    <router-link :to="{ name: 'DetailedNewsView', query: {id:id,date:date,title:title,description:description,imageUrl:imageUrl,content:content,author:author,url:url } }" @click="saveItem(this.title)">
+        <a href="#" class="btn btn-sm btn-info d-sm-none d-md-block">Show More</a>
+    </router-link>
+        <img src="./icons/editText.png" v-on:click="editHeadline" id="editText" class="btn btn-sm d-md-block"/>
+
+</div>
+
+
   </div>
 </div>
 
@@ -13,6 +21,20 @@
 
 
 <script>
+
+import Cookies from 'js-cookie'
+
+const pageHistory = {
+  state: {
+    visitedPages: []
+  },
+  mutations: {
+    addVisitedPage(state, page) {
+      state.visitedPages.push(page);
+    }
+  }
+};
+
 
 export default {
     name:'NewsCard',
@@ -26,22 +48,20 @@ export default {
         author:String,
         url:String
     },
-    computed: {
-        formattedDescription(){
-            return this.description.substring(0, 20) + "...";
-        }
-    },
     methods: {
-    saveItem(item) {
-      // Save the item to the local storage
-      const items = JSON.parse(localStorage.getItem('items'))??[]
-      items.push(item);
-      localStorage.setItem('items', JSON.stringify(items));
-    },
+        saveItem(title) {
+            this.$store.commit('pageHistory/addVisitedPage', { title:title });
+  },
 
-    editTitle(){
-      var inputTitle = prompt("Enter new title:")
-      document.getElementById('news-title-'+this.id).innerHTML = inputTitle
+    editHeadline(){
+
+        var inputTitle = prompt("Enter New Title?");
+        if (inputTitle.length < 255) {
+              document.getElementById('card-title-'+this.id).innerHTML = inputTitle
+              
+        }else{
+            alert("Title is too long.");
+        }
     }
   }
 }
@@ -53,10 +73,10 @@ export default {
 <style>
 
 .card {
-  flex-basis: calc(25% - 20px); /* make each card take up 25% of the width of the container and add a 20px margin */
-  margin:5px; /* add a 10px margin to each side of the card */
-  padding: 5px; /* add padding to the card */
-  box-shadow: 5px 5px 5px 0px gray; /* match the offset values with the margin values */
+  flex-basis: calc(25% - 20px);
+  margin:5px; 
+  padding: 5px; 
+  box-shadow: 5px 5px 5px 0px gray; 
 }
 
 .card-img-top{
@@ -65,8 +85,8 @@ export default {
 
 .card-title{
     height: 70px;
-    overflow: hidden; /* hide any text that overflows the container */
-  text-overflow: ellipsis; /* add an ellipsis at the end of the truncated text */
+    overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 .card-title::after{
@@ -75,8 +95,8 @@ export default {
 
 .card-text{
     height: 116px;
-    overflow: hidden; /* hide any text that overflows the container */
-    text-overflow: ellipsis; /* add an ellipsis at the end of the truncated text */
+    overflow: hidden; 
+    text-overflow: ellipsis;
 
 }
 
@@ -84,6 +104,12 @@ export default {
 
     content: "...";
 
+}
+
+#editText{
+    height: 20%;
+    width: 20%;
+    margin-left: 30%;
 }
 
 

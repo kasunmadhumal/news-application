@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-6">
             <p class="lead">{{content}}</p>
-            <a v-bind:href="url" class="btn btn-primary btn-lg float-right">Read More</a>
+            <a v-bind:href="url" class="btn btn-primary btn-lg float-right" target="_blank">Read More</a>
         </div>
     </div>
     <div class="row my-4">
